@@ -39,6 +39,13 @@ public:
       //Postcondition: first points to the new list, newItem is
       //    inserted at the end of the list, last points to the
       //    last node in the list, and count is incremented by 1.
+    
+    void mergeLists(orderedLinkedList<Type> &list1,
+         orderedLinkedList<Type> &list2);
+    //This function creates a new list by merging the
+    //elements of list1 and list2.
+    //Postcondition: first points to the merged list; list1
+    // and list2 are empty
 
     void deleteNode(const Type& deleteItem);
       //Function to delete deleteItem from the list.
@@ -134,6 +141,39 @@ void orderedLinkedList<Type>::insertLast(const Type& newItem)
 {
     insert(newItem);
 }//end insertLast
+
+template<class Type>
+void orderedLinkedList<Type>::mergeLists(orderedLinkedList<Type>& list1, orderedLinkedList<Type>& list2){
+    // Pointers to traverse list 1 and 2
+    nodeType<Type>* current_list1 = list1.first;
+    nodeType<Type>* current_list2 = list2.first;
+    nodeType<Type>* newNode; //Create new nodes for merging list
+    nodeType<Type>** tail = &this->first; //pointer to tail of merged list
+
+    while(current_list1 != NULL || current_list2 != NULL) {
+        //check whether to take input from list 1 or 2
+        if(current_list2 == NULL || (current_list1 != NULL && current_list1->info <= current_list2->info)){
+            //creates new node from input of list 1
+            newNode = new nodeType<Type>;
+            newNode->info = current_list1->info;
+            current_list1 = current_list1->link;
+        }else{
+            //creates new node from input of list 2
+            newNode = new nodeType<Type>;
+            newNode->info = current_list2->info;
+            current_list2 = current_list2->link;
+        }
+        //adding new node to merged list
+        newNode->link = NULL;
+        *tail = newNode;
+        tail = &newNode->link;
+        this->count++;
+    }
+    //Deletes input lists
+    list1.destroyList();
+    list2.destroyList();
+}
+
 
 template<class Type>
 void orderedLinkedList<Type>::deleteNode(const Type& deleteItem)
