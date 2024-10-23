@@ -13,7 +13,7 @@ using namespace std;                            //Line 3
 
 int main()                                      //Line 4
 {
-    orderedLinkedList<int> list1, list2;        //Line 5
+    orderedLinkedList<int> list1, list2, list3, list4;        //Line 5
     int num;                                    //Line 6
 
     cout << "Line 7: Enter numbers ending "
@@ -38,18 +38,34 @@ int main()                                      //Line 4
     list2.print();                              //Line 20
     cout << endl;                               //Line 21
 
-    cout << "Line 22: Enter the number to be "
-         << "deleted: ";                        //Line 22
-    cin >> num;                                 //Line 23
-    cout << endl;                               //Line 24
+    //cout << "Line 22: Enter the number to be "
+    //     << "deleted: ";                        //Line 22
+    //cin >> num;                                 //Line 23
+    //cout << endl;                               //Line 24
 
-    list2.deleteNode(num);                      //Line 25
+    //list2.deleteNode(num);                      //Line 25
 
-    cout << "Line 26: After deleting "
-         << num << ", list2: " << endl;         //Line 26
-    list2.print();                              //Line 27
-    cout << endl;                               //Line 28
+    //cout << "Line 26: After deleting "
+    //     << num << ", list2: " << endl;         //Line 26
+    //list2.print();                              //Line 27
+    //cout << endl;                               //Line 28
 
-    return 0;					                //Line 29
-}                                               //Line 30
+    cout << "Enter another list ending in -999: " << endl;
+    cin >> num;                                 
+    while (num != -999){ 
+        list3.insert(num);                    
+        cin >> num;                             
+    } 
+    cout << endl;                     
+    cout << "List3: ";             
+    list3.print();                            
+    cout << endl;    
+
+    cout << "Merging List1 and List3..."   << endl;
+    list4.mergeLists(list1, list3);
+    list4.print();
+    cout << endl;
+
+    return 0;					                
+}                                               
 
